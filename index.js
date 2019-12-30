@@ -45,12 +45,12 @@ app.post('/', cors(corsOptions), (req, res) => {
       name: req.body.name,
       slug: req.body.slug,
       date: date.toISOString(),
-      parent_id: req.body.parent_id
+      parent_id: (nested_replies ? req.body.parent_id : 0)
     })
     if (config.captcha.status) { // if recaptcha is on
       recaptcha.verify(req, function (rerror, rdata) {
         if (rerror == null) {
-          ghrepo.updateContents(filename, config.commit_message, data, 'put-sha-here', function () {
+          ghrepo.createContents(filename, config.commit_message, data, function () {
             res.json({
               error_code: 'success'
             })
@@ -63,7 +63,7 @@ app.post('/', cors(corsOptions), (req, res) => {
         }
       })
     } else {
-      ghrepo.updateContents(filename, config.commit_message, data, 'put-sha-here', function () {
+      ghrepo.createContents(filename, config.commit_message, data, function () {
         res.json({
           error_code: null
         })

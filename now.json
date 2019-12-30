@@ -6,17 +6,13 @@
             "use": "@now/node-server"
         }
     ],
-    "routes": [{
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST",
-            "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
-        },
+    "routes": [
         "src": "/.*",
         "dest": "/index.js"
-    }],
-    "env": {
-        "GITHUB_TOKEN": "@github_token",
-        "RECAPTCHA_SECRET_TOKEN": "@recaptcha_secret"
     }
+],
+"env": {
+    "GITHUB_TOKEN": "@github_token",
+    "RECAPTCHA_SECRET_TOKEN": "@recaptcha_secret"
+}
 }

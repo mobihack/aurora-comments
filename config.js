@@ -10,7 +10,7 @@ module.exports = {
   captcha: {
     status: true,
     secret: process.env.RECAPTCHA_SECRET_TOKEN,
-    site: '6LcTyyYUAAAAAH5OOPE3J2TSNqd9SEU8QVL8nd0L'
+    site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add site key here.
   }, // enable captcha using true
   commit_message: 'Sync Comments.',
   moderation: false // create pull request instead of updating repo
