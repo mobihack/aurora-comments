@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-gh-comments",
+  "version": "0.0.1",
+  "description": "A simple nodejs comments system that uses github commits to save comments to the same repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-recaptcha": "^5.0.1",
+    "octonode": "^0.9.5",
+    "slug": "^2.0.0"
+  }
+}
