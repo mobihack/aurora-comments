@@ -1,4 +1,4 @@
-![Aurora - static comments system.](docs/banner.png)
+![Aurora - static comments system.](docs/assets/images/banner.png)
 
 # Aurora Comment
 
