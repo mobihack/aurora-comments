@@ -16,50 +16,50 @@ Install [`now-cli`](https://zeit.co/download) first.
 
 1) Clone this repository.
 
-    ```sh
-    git clone https://github.com/mobihack/aurora-comments.git
-    ```
+ ```sh
+ git clone https://github.com/mobihack/aurora-comments.git
+ ```
 
 2) Rename `.env.sample` to `.env`.
 3) Edit `.env`.
-   - Add your [Github Personal Access Token](https://github.com/settings/tokens).
-   - Add your [Recaptcha Secret Key](https://www.google.com/recaptcha/).
+ - Add your [Github Personal Access Token](https://github.com/settings/tokens).
+ - Add your [Recaptcha Secret Key](https://www.google.com/recaptcha/).
  4) Edit config.js and add your site key.
  5) Add the secret tokens:
 
-    ```sh
-    now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
-    ```
+ ```sh
+ now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
+ ```
 
-    ```sh
-    now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
-    ```
+ ```sh
+ now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
+ ```
 
 ## Configurations (config.js)
 ```js
 module.exports = {
-  token: process.env.GITHUB_TOKEN,
-  repo: '<user/repo_name>', // your repository name
-  nested_replies: true, // set false if you dont want nested replies
-  domains: [
-    /* CORS - Allowed domain list */
-    'http://localhost:4000',
-    'https://example.com',
-    'https://beta.example.com'
-  ],
-  captcha: {
-    status: true, // enable or disable reCaptcha. Don't disable as your access token may get abuse.
-    secret: process.env.RECAPTCHA_SECRET_TOKEN,
-    site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
-  },
-  commit_message: 'Sync Comments.', // Commit Message for push operation.
-  moderation: false // create pull request instead of pushing comments. This feature has not been implemented.
+ token: process.env.GITHUB_TOKEN,
+ repo: '<user/repo_name>', // your repository name
+ nested_replies: true, // set false if you dont want nested replies
+ domains: [
+ /* CORS - Allowed domain list */
+ 'http://localhost:4000',
+ 'https://example.com',
+ 'https://beta.example.com'
+ ],
+ captcha: {
+ status: true, // enable or disable reCaptcha. Don't disable as your access token may get abuse.
+ secret: process.env.RECAPTCHA_SECRET_TOKEN,
+ site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
+ },
+ commit_message: 'Sync Comments.', // Commit Message for push operation.
+ moderation: false // create pull request instead of pushing comments. This feature has not been implemented.
 }
 ```
 
 ## Development Setup
 
-Use this example to start a developemt instance.
+Use this example to start a development instance.
 
 ```sh
 now dev
@@ -76,6 +76,40 @@ now --prod
 ```
 
 Secrets must be set in advance.
+
+## API Outputs
+
+All API transactions will have an output of this format.
+
+```json
+{
+ "success": true,
+ "code": "success"
+}
+```
+```json
+{
+ "success": false,
+ "code": "error-code",
+ "message": "Error message, if any."
+}
+```
+### API `success`
+
+True if the transaction was successful, false if not.
+
+### API `code`
+| Output               | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| insufficient-inputs  | Inputs needed were not supplied.               |
+| recaptcha_error      | reCaptcha error.                               |
+| repo-not-configured  | The named site was not found in `config.repo`  |
+| repo-not-specified   | A named site was not sent in the POST params.  |
+| success              | OK / Success.                                  |
+
+
+
+
 
 ## Contributing
 
