@@ -11,9 +11,8 @@ markdown: kramdown
 
 comments:
   enabled: true
-  url: 'https://nodejs-gh-comments.mobihack.now.sh/'
-  levels: 3
   name: 'aurora-demo'
+  url: 'https://aurora-comments.mobihack.now.sh/'
   
 plugins:
   - jekyll-paginate
