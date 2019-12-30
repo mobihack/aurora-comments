@@ -41,7 +41,7 @@ app.post('/', cors(corsOptions), (req, res) => {
       success: false,
       code: 'repo-not-specified'
     })
-  } else if (config.repos[req.body.sitename] !== 'undefined') {
+  } else if (config.repos[req.body.sitename] === 'undefined') {
     res.json({
       success: false,
       code: 'repo-not-configured'
@@ -53,7 +53,10 @@ app.post('/', cors(corsOptions), (req, res) => {
     var ghrepo = client.repo(config.repos[req.body.sitename].repo)
     var date = new Date()
     var uuidslug = uuidv1()
-    var filename = (config.repos[req.body.sitename].repo_docs ? 'docs/' : null) + '_data/comments/' + uuidslug + '.json'
+    var filename = '_data/comments/' + uuidslug + '.json'
+    if (config.repos[req.body.sitename].repo_docs) {
+      filename = 'docs/' + filename
+    }
     var data = JSON.stringify({
       id: uuidslug,
       type: 'user',
@@ -64,8 +67,8 @@ app.post('/', cors(corsOptions), (req, res) => {
       parent_id: (config.repos[req.body.sitename].nested_replies ? req.body.parent_id : 0)
     })
     // if captcha is on in config.
-    if (config.repos[req.body.sitename].captcha.status) {
-      recaptcha.verify(req, function (rerror, rdata) {
+    if (config.repos[req.body.sitename].captcha_status) {
+      recaptcha.verify(req, function (rerror) {
         if (rerror == null) {
           ghrepo.createContents(filename, config.commit_message, data, function () {
             res.json({
@@ -76,7 +79,7 @@ app.post('/', cors(corsOptions), (req, res) => {
         } else {
           res.json({
             success: false,
-            code: 'recaptcha_error',
+            code: 'recaptcha-error',
             message: rerror
           })
         }

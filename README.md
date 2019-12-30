@@ -108,7 +108,7 @@ True if the transaction was successful, false if not.
 | Output               | Description                                    |
 | -------------------- | ---------------------------------------------- |
 | insufficient-inputs  | Inputs needed were not supplied.               |
-| recaptcha_error      | reCaptcha error.                               |
+| recaptcha-error      | reCaptcha error.                               |
 | repo-not-configured  | The named site was not found in `config.repo`  |
 | repo-not-specified   | A named site was not sent in the POST params.  |
 | success              | OK / Success.                                  |
