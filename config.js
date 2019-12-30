@@ -15,7 +15,6 @@ module.exports = {
     'https://example.github.io'
   ],
   captcha: {
-    status: true,
     secret: process.env.RECAPTCHA_SECRET_TOKEN,
     site: '<YOUR_RECAPTCHA_SITE_KEY>'
   },

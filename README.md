@@ -38,23 +38,29 @@ Install [`now-cli`](https://zeit.co/download) first.
 ## Configurations (config.js)
 ```js
 module.exports = {
- token: process.env.GITHUB_TOKEN,
- repo: '<user/repo_name>', // your repository name
- nested_replies: true, // set false if you dont want nested replies
- domains: [
- /* CORS - Allowed domain list */
- 'http://localhost:4000',
- 'https://example.com',
- 'https://beta.example.com'
- ],
- captcha: {
- status: true, // enable or disable reCaptcha. Don't disable as your access token may get abuse.
- secret: process.env.RECAPTCHA_SECRET_TOKEN,
- site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
- },
- commit_message: 'Sync Comments.', // Commit Message for push operation.
- moderation: false // create pull request instead of pushing comments. This feature has not been implemented.
+  token: process.env.GITHUB_TOKEN,
+  repos: {
+    'example': { // your sitename
+      repo: 'user/repo_name', // your repository name
+      repo_docs: false,
+      nested_replies: true, // set true to enable nested replies for this site
+      captcha_status: true  // set true to enable captcha for this site
+    }
+  },
+  domains: [
+    /* CORS - Allowed domain list */
+    'http://localhost:4000',
+    'https://example.com',
+    'https://beta.example.com',
+    'https://example.github.io'
+  ],
+  captcha: {
+    secret: process.env.RECAPTCHA_SECRET_TOKEN,
+    site: '<YOUR_RECAPTCHA_SITE_KEY>' // Your reCaptcha site key.
+  },
+  commit_message: 'Sync Comments.' // Commit Message for push operation.
 }
+
 ```
 
 ## Development Setup
