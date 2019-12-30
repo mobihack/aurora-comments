@@ -47,7 +47,7 @@ module.exports = {
     site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
   },
   commit_message: 'Sync Comments.', // Commit Message for push operation.
-  moderation: false // create pull request instead of pushing comments. Thsi feature has not been implemented.
+  moderation: false // create pull request instead of pushing comments. This feature has not been implemented.
 }
 ```
 

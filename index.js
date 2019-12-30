@@ -28,7 +28,9 @@ app.get('/', (req, res) => {
   res.json('A simple comment server.')
 })
 
-app.options('/', cors()) // enable pre-flight request for post request
+// enable pre-flight request for post request
+app.options('/', cors())
+
 app.post('/', cors(corsOptions), (req, res) => {
   if (typeof req.body.name !== 'undefined' && req.body.name &&
     typeof req.body.message !== 'undefined' && req.body.message &&
@@ -36,7 +38,7 @@ app.post('/', cors(corsOptions), (req, res) => {
     typeof req.body.parent_id !== 'undefined') {
     var date = new Date()
     var uuidslug = uuidv1()
-    var filename = '_data/comments/' + Date.now() + uuidslug + '.json'
+    var filename = '_data/comments/' + uuidslug + '.json'
     var data = JSON.stringify({
       id: uuidslug,
       type: 'user',
@@ -46,7 +48,8 @@ app.post('/', cors(corsOptions), (req, res) => {
       date: date.toISOString(),
       parent_id: (config.nested_replies ? req.body.parent_id : 0)
     })
-    if (config.captcha.status) { // if recaptcha is on
+    // if captcha is on in config.
+    if (config.captcha.status) {
       recaptcha.verify(req, function (rerror, rdata) {
         if (rerror == null) {
           ghrepo.createContents(filename, config.commit_message, data, function () {
@@ -62,9 +65,10 @@ app.post('/', cors(corsOptions), (req, res) => {
         }
       })
     } else {
+      // if captcha is not on in config.
       ghrepo.createContents(filename, config.commit_message, data, function () {
         res.json({
-          error_code: null
+          error_code: 'success'
         })
       })
     }
