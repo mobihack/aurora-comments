@@ -1,8 +1,12 @@
 module.exports = {
   token: process.env.GITHUB_TOKEN,
-  repo: '<user/repo_name>',
-  repo_docs: false,
-  nested_replies: true,
+  repos: {
+    'user/repo_name': {
+      repo_docs: false,
+      nested_replies: true,
+      captcha_status: true
+    }
+  },
   domains: [
     'http://localhost:4000',
     'https://example.com',

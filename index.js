@@ -9,7 +9,6 @@ var recaptcha = new Recaptcha(config.captcha.site, config.captcha.secret)
 
 var github = require('octonode')
 var client = github.client(config.token)
-var ghrepo = client.repo(config.repo)
 
 app.use(express.json())
 
@@ -32,13 +31,22 @@ app.get('/', (req, res) => {
 app.options('/', cors())
 
 app.post('/', cors(corsOptions), (req, res) => {
-  if (typeof req.body.name !== 'undefined' && req.body.name &&
+  if (req.body.repo === 'undefined' || !req.body.repo) {
+    res.json({
+      error_code: 'repo-not-specified'
+    })
+  } else if (config.repos[req.body.repo] !== 'undefined') {
+    res.json({
+      error_code: 'repo-not-configured'
+    })
+  } else if (typeof req.body.name !== 'undefined' && req.body.name &&
     typeof req.body.message !== 'undefined' && req.body.message &&
     typeof req.body.slug !== 'undefined' && req.body.slug &&
     typeof req.body.parent_id !== 'undefined') {
+    var ghrepo = client.repo(req.body.repo)
     var date = new Date()
     var uuidslug = uuidv1()
-    var filename = (config.repo_docs ? 'docs/' : null) + '_data/comments/' + uuidslug + '.json'
+    var filename = (config.repos[req.body.repo].repo_docs ? 'docs/' : null) + '_data/comments/' + uuidslug + '.json'
     var data = JSON.stringify({
       id: uuidslug,
       type: 'user',
@@ -46,10 +54,10 @@ app.post('/', cors(corsOptions), (req, res) => {
       name: req.body.name,
       slug: req.body.slug,
       date: date.toISOString(),
-      parent_id: (config.nested_replies ? req.body.parent_id : 0)
+      parent_id: (config.repos[req.body.repo].nested_replies ? req.body.parent_id : 0)
     })
     // if captcha is on in config.
-    if (config.captcha.status) {
+    if (config.repos[req.body.repo].captcha.status) {
       recaptcha.verify(req, function (rerror, rdata) {
         if (rerror == null) {
           ghrepo.createContents(filename, config.commit_message, data, function () {

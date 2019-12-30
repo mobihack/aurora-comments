@@ -4,6 +4,12 @@
 
 > A now.sh ready Github based commenting system.
 
+## Features
+ - Static Comments.
+ - Multiple website setup.
+ - Nested comments.
+ - reCaptcha
+
 ## Installation
 
 Install [`now-cli`](https://zeit.co/download) first.
