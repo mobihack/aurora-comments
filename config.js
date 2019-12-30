@@ -1,7 +1,8 @@
 module.exports = {
   token: process.env.GITHUB_TOKEN,
   repos: {
-    'user/repo_name': {
+    'sitename': {
+      repo: 'user/repo_name',
       repo_docs: false,
       nested_replies: true,
       captcha_status: true
@@ -18,6 +19,5 @@ module.exports = {
     secret: process.env.RECAPTCHA_SECRET_TOKEN,
     site: '<YOUR_RECAPTCHA_SITE_KEY>'
   },
-  commit_message: 'Sync Comments.',
-  moderation: false
+  commit_message: 'Sync Comments.'
 }

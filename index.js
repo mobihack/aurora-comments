@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.options('/', cors())
 
 app.post('/', cors(corsOptions), (req, res) => {
-  if (req.body.repo === 'undefined' || !req.body.repo) {
+  if (req.body.sitename === 'undefined' || !req.body.sitename) {
     res.json({
       error_code: 'repo-not-specified'
     })
@@ -43,7 +43,7 @@ app.post('/', cors(corsOptions), (req, res) => {
     typeof req.body.message !== 'undefined' && req.body.message &&
     typeof req.body.slug !== 'undefined' && req.body.slug &&
     typeof req.body.parent_id !== 'undefined') {
-    var ghrepo = client.repo(req.body.repo)
+    var ghrepo = client.repo(config.repos[req.body.repo].repo)
     var date = new Date()
     var uuidslug = uuidv1()
     var filename = (config.repos[req.body.repo].repo_docs ? 'docs/' : null) + '_data/comments/' + uuidslug + '.json'
