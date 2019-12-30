@@ -1,30 +1,33 @@
 <div class="comments">
-      <div id="comment-error" class="notification is-danger is-hidden">
-      </div>
       <div class="notification is-primary">
-            Be civil to each other. Please read our Comment Policy before
+            Be civil to each other. Please read our <a
+                  href="{{ '/pages/comment-policy.html' | prepend: site.baseurl }}">Comment Policy</a> before
             commenting.
       </div>
       <div id="comments-slot">
-            {% include comment/comment_single.html slug=page.slug parent_id="0" level=1 max=site.comments.levels %}
+            {% include blog/comment/comment_single.html slug=page.slug parent_id="0" level=1 max=site.comments.levels %}
       </div>
       <br>
       <article class="media comment-form">
             <figure class="media-left">
                   <p class="image is-64x64">
-                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <i class="material-icons">
+                              person_outline
+                        </i>
                   </p>
             </figure>
             <div class="media-content">
                   <form id="comment-form" enctype="application/x-www-form-urlencoded" method="POST">
                         <input required name="slug" class="input" type="hidden" value="{{ page.slug }}">
                         <input required name="parent_id" class="input" type="hidden" value="0">
-                        
+
                         <div class="notification comment-reply is-hidden">
                               <button class="delete" onclick="CommentSystem.cancelReply();"></button>
                               You are replying to a comment now.
                               <input required name="parent_id" class="input" type="hidden" value="0">
                         </div>
+                        <div id="comment-error" class="notification is-danger is-hidden"></div>
+                        <div id="comment-success" class="notification is-success is-hidden"></div>
 
                         <div class="field">
                               <label class="label">Name</label>
@@ -56,13 +59,14 @@
       <br>
 </div>
 <script language="javascript" type="text/javascript">
-      var CommentSystem = function () {
+      var AuroraComments = function () {
             var config;
             init = function (con) {
                   config = con;
 
                   config['form_elem'] = document.getElementById(config.form);
-                  config['error_elem'] = document.getElementById(config.form);
+                  config['error_elem'] = document.getElementById(config.error);
+                  config['success_elem'] = document.getElementById(config.success);
 
                   putComments();
             },
@@ -71,17 +75,18 @@
                         cancelReply();
                         config.form_elem.reset();
                         config.form_elem.querySelector('button[type="submit"]').classList.remove('is-loading');
-                        cleanslate();
-                        getComments();
-                  },
-                  cleanslate = function () {
-                        while (config.target_elem.firstChild) {
-                              config.target_elem.removeChild(config.target_elem.firstChild);
-                        }
                   },
                   message = function (msg, type) {
                         config.form_elem.querySelector('button[type="submit"]').classList.remove('is-loading');
-                        alert(msg);
+                        config.error_elem.classList.add('is-hidden')
+                        config.success_elem.classList.add('is-hidden')
+                        if (type === 'error') {
+                              config.error_elem.innerHTML = msg;
+                              config.error_elem.classList.remove('is-hidden')
+                        } else if (type === 'success') {
+                              config.success_elem.innerHTML = msg;
+                              config.success_elem.classList.remove('is-hidden')
+                        }
                   },
                   cancelReply = function () {
                         config.form_elem.querySelector('input[name="parent_id"]').value = "0";
@@ -102,26 +107,26 @@
                               request.onload = function () {
                                     if (request.status >= 200 && request.status < 400) {
                                           var data = JSON.parse(request.responseText);
-                                          if (typeof data['error_code'] !== 'undefined') {
-                                                if (data['error_code'] == 'recaptcha_error') {
-                                                      message('ReCaptcha:' + data['error_msg'], 'danger');
-                                                }else if (data['error_code'] == 'insufficient-inputs') {
+                                          if (typeof data['code'] !== 'undefined') {
+                                                if (data['code'] == 'recaptcha-error') {
+                                                      message('Captcha failed.', 'error');
+                                                } else if (data['code'] == 'insufficient-inputs') {
                                                       message('Error: Insufficient inputs.');
-                                                }else if (data['error_code']== 'success') {
-                                                      message('The comment was posted successfully.','success');
+                                                } else if (data['code'] == 'success') {
+                                                      message('The comment was posted successfully.', 'success');
                                                       reset();
                                                 }
                                           } else {
-                                                message('Unknow error.','danger');
+                                                message('An unknown error occured.', 'error');
                                           }
 
                                     } else {
-                                          message('We encountered an error.', 'danger');
+                                          message('We encountered an error.', 'error');
                                     }
                               };
 
                               request.onerror = function () {
-                                    message('We encountered a connection problem.', 'danger');
+                                    message('A connection problem was encountered.', 'error');
                               };
 
                               request.send(JSON.stringify(
@@ -130,7 +135,8 @@
                                           parent_id: config.form_elem.querySelector('input[name="parent_id"]').value,
                                           message: config.form_elem.querySelector('textarea[name="message"]').value,
                                           slug: config.form_elem.querySelector('input[name="slug"]').value,
-                                          'g-recaptcha-response': grecaptcha.getResponse()
+                                          'g-recaptcha-response': grecaptcha.getResponse(),
+                                          sitename: config.sitename
                                     }));
                         });
                   };
@@ -139,14 +145,14 @@
                   cancelReply: cancelReply,
                   reply: reply
             };
-      }()
+      }();
 
-      CommentSystem.init({
+      AuroraComments.init({
             api: '{{ site.comments.url }}',
+            sitename: '{{ site.comments.name }}',
             form: 'comment-form',
+            success: 'comment-success',
             error: 'comment-error'
       });
-
-
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
