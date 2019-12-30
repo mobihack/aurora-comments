@@ -34,7 +34,6 @@ app.post('/', cors(corsOptions), (req, res) => {
     typeof req.body.message !== 'undefined' && req.body.message &&
     typeof req.body.slug !== 'undefined' && req.body.slug &&
     typeof req.body.parent_id !== 'undefined') {
-
     var date = new Date()
     var uuidslug = uuidv1()
     var filename = '_data/comments/' + Date.now() + uuidslug + '.json'
@@ -45,7 +44,7 @@ app.post('/', cors(corsOptions), (req, res) => {
       name: req.body.name,
       slug: req.body.slug,
       date: date.toISOString(),
-      parent_id: (nested_replies ? req.body.parent_id : 0)
+      parent_id: (config.nested_replies ? req.body.parent_id : 0)
     })
     if (config.captcha.status) { // if recaptcha is on
       recaptcha.verify(req, function (rerror, rdata) {

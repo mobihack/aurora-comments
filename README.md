@@ -10,18 +10,18 @@ Install [`now-cli`](https://zeit.co/download) first.
 
 1) Clone this repository.
 
-```git clone https://github.com/mobihack/aurora-comments.git```
+    ```git clone https://github.com/mobihack/aurora-comments.git```
 
 2) Rename `.env.sample` to `.env`.
 3) Edit `.env`.
- - Add your [Github Personal Access Token](https://github.com/settings/tokens).
- - Add your [Recaptcha Secret Key](https://www.google.com/recaptcha/).
+   - Add your [Github Personal Access Token](https://github.com/settings/tokens).
+   - Add your [Recaptcha Secret Key](https://www.google.com/recaptcha/).
  4) Edit config.js and add your site key.
  5) Add the secret tokens:
 
-```now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>```
+    ```now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>```
 
-```now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>```
+    ```now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>```
 
 ## Config
 ```
@@ -31,13 +31,13 @@ module.exports = {
   nested_replies: true, // set false if you dont want nested replies
   domains: [
     'http://localhost:4000',
-    'https://mobihack.me',
-    'https://beta.mobihack.me' // CORS allowed domain list
+    'https://example.com',
+    'https://beta.example.com' // CORS allowed domain list
   ],
   captcha: {
     status: true, // enable or disable reCaptcha (don't disable, access token may get abused)
     secret: process.env.RECAPTCHA_SECRET_TOKEN, // don't change
-    site: '6LcTyyYUAAAAAH5OOPE3J2TSNqd9SEU8QVL8nd0L' // Add reCaptcha site key here.
+    site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
   }, // enable captcha using true
   commit_message: 'Sync Comments.', // Commit Message for push operation.
   moderation: false // create pull request instead of updating repo
