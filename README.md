@@ -10,7 +10,9 @@ Install [`now-cli`](https://zeit.co/download) first.
 
 1) Clone this repository.
 
-    ```git clone https://github.com/mobihack/aurora-comments.git```
+    ```sh
+    git clone https://github.com/mobihack/aurora-comments.git
+    ```
 
 2) Rename `.env.sample` to `.env`.
 3) Edit `.env`.
@@ -19,37 +21,43 @@ Install [`now-cli`](https://zeit.co/download) first.
  4) Edit config.js and add your site key.
  5) Add the secret tokens:
 
-    ```now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>```
+    ```sh
+    now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
+    ```
 
-    ```now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>```
+    ```sh
+    now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
+    ```
 
-## Config
-```
+## Configurations (config.js)
+```js
 module.exports = {
-  token: process.env.GITHUB_TOKEN, // don't change
-  repo: 'user/repo-name', // your repository name
+  token: process.env.GITHUB_TOKEN,
+  repo: '<user/repo_name>', // your repository name
   nested_replies: true, // set false if you dont want nested replies
   domains: [
+    /* CORS - Allowed domain list */
     'http://localhost:4000',
     'https://example.com',
-    'https://beta.example.com' // CORS allowed domain list
+    'https://beta.example.com'
   ],
   captcha: {
-    status: true, // enable or disable reCaptcha (don't disable, access token may get abused)
-    secret: process.env.RECAPTCHA_SECRET_TOKEN, // don't change
+    status: true, // enable or disable reCaptcha. Don't disable as your access token may get abuse.
+    secret: process.env.RECAPTCHA_SECRET_TOKEN,
     site: '<YOUR_RECAPTCHA_SITE_KEY>' // Add reCaptcha site key here.
-  }, // enable captcha using true
+  },
   commit_message: 'Sync Comments.', // Commit Message for push operation.
-  moderation: false // create pull request instead of updating repo
+  moderation: false // create pull request instead of pushing comments. Thsi feature has not been implemented.
 }
-
 ```
 
 ## Development Setup
 
 Use this example to start a developemt instance.
 
-```now dev```
+```sh
+now dev
+```
 
 Tokens will be read from `.env` file.
 
@@ -57,7 +65,9 @@ Tokens will be read from `.env` file.
 
 Use this example to push code to production.
 
-```now --prod```
+```sh
+now --prod
+```
 
 Secrets must be set in advance.
 
