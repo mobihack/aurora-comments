@@ -1,0 +1,27 @@
+{% if include.level <= include.max %}
+{% assign comments = site.data.comments | where:'slug',include.slug | where:'parent_id',include.parent_id | sort: 'date' %}
+{% for comment in comments %}
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+            <i class="material-icons">
+                person_outline
+            </i>
+        </p>
+    </figure>
+    <div class="media-content" data-comment-id="%id%">
+        <div class="content">
+            <p>
+                <strong>{{ comment.name }}</strong> <small class="is-size-7 has-text-primary">user</small>
+                <br>
+                {{comment.message}}
+                <br>
+                <small>{% if include.level < include.max %}<a onclick="CommentSystem.reply('{{ comment.id }}')" href="#comment-form">Reply</a> &middot; {% endif %}{{ comment.date | date: '%B %d, %Y' }}</small>
+            </p>
+        </div>
+        {% assign level = include.level | plus: 1 %}
+        {% include comment/comment_single.html slug=include.slug parent_id=comment.id level=level max=include.max %}
+    </div>
+</article>
+{% endfor %}
+{% endif %}

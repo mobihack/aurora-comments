@@ -1,0 +1,45 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+// Bulma.io CSS Framework
+$primary: #5271ff;
+@import 'bulma/bulma';
+body{
+  font-family: 'Lato', sans-serif;
+}
+.navbar-brand{
+  font-family: 'Raleway', sans-serif;
+  font-weight: bolder;
+  color: $primary;
+}
+.title,.subtitle{
+  font-family: 'Raleway', sans-serif;
+}
+
+.comments .media > .media-left > .image {
+  background-color: $light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > i {
+    font-size: 2rem;
+    color: $grey-light;
+  }
+}
+
+
+.features-section{
+  .icon > .fa{
+    font-size: 2.5rem;
+    color: $primary;
+  }
+  p.title{
+    margin:0;
+    margin-top:0.75rem;
+    margin-bottom:0.25rem;
+    font-size: 1.25rem;
+  }
+  p{
+    margin:0;
+  }
+}

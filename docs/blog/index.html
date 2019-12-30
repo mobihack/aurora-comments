@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Blog
+            </h1>
+            <h2 class="subtitle">
+                Demo for Aurora Comments.
+            </h2>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        {% for post in paginator.posts %}
+        <div class="article">
+                <h3 class="title is-5"><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+                <p>{{ post.excerpt }}</p>
+                <p><small>02.02.2017 - 06:36</small></p>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</section>

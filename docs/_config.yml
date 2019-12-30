@@ -1,0 +1,24 @@
+name: Aurora Comments
+description: "A now.sh ready Github based commenting system."
+baseurl: /aurora-comments
+url: https://mobihack.github.io
+permalink: /blog/:title.html
+sass:
+  style: compressed
+paginate: 5
+paginate_path: "/blog/:num/"
+markdown: kramdown
+
+comments:
+  enabled: true
+  url: 'https://nodejs-gh-comments.mobihack.now.sh/'
+  levels: 3
+  
+plugins:
+  - jekyll-paginate
+
+exclude:
+  - README.md
+  - LICENSE
+  - CNAME
+  - vendor

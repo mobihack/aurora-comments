@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+  <link href="https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="{{ "/assets/images/favicon/apple-touch-icon.png" | prepend: site.baseurl }}">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="{{ "/assets/images/favicon/favicon-32x32.png" | prepend: site.baseurl }}">
+  <link rel="icon" type="image/png" sizes="16x16"
+    href="{{ "/assets/images/favicon/favicon-16x16.png" | prepend: site.baseurl }}">
+
+  <link rel="stylesheet" href="{{ "/assets/css/application.css" | prepend: site.baseurl }}" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a href="{{ "/" | prepend: site.baseurl }}" class="navbar-item">
+          {{ site.name }}
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a href="{{ "/docs.html" | prepend: site.baseurl }}"
+                  class="navbar-item {% if page.url == "/" %} is-active {% endif %}">
+                  Documentation
+                </a>
+              </p>
+              <p class="control">
+                <a href="{{ "/blog/" | prepend: site.baseurl }}"
+                  class="navbar-item {% if page.url == "/" %} is-active {% endif %}">
+                  Demo
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+    </nav>
+  </div>
+
+  {{ content }}
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong><a href="https://github.com/mobihack/aurora-comments">Aurora Comments</a></strong> by <a
+            href="http://github.com/mobihack">Shameem A.R.</a>.
+            <br>
+            The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+</body>
+
+</html>

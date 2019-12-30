@@ -38,7 +38,7 @@ app.post('/', cors(corsOptions), (req, res) => {
     typeof req.body.parent_id !== 'undefined') {
     var date = new Date()
     var uuidslug = uuidv1()
-    var filename = '_data/comments/' + uuidslug + '.json'
+    var filename = (config.repo_docs ? 'docs/' : null) + '_data/comments/' + uuidslug + '.json'
     var data = JSON.stringify({
       id: uuidslug,
       type: 'user',
