@@ -2,7 +2,7 @@
 
 # Aurora Comment
 
-> A now.sh ready Github based commenting system.
+> A `ZEIT Now` ready Github based commenting system.
 
 ## Features
  - Static Comments.
@@ -21,9 +21,9 @@
 ## Installation
 
 You can deploy Aurora Comments in two ways:
- 1) Deploy directly to `now.sh`.
+ 1) Deploy directly to `ZEIT Now`.
     - Use this if what you only need is a comments system. 
- 2) Setup a development setup and deploy to `now.sh`.
+ 2) Setup a development setup and deploy to `ZEIT Now`.
     - Use this if what you need a locally hosted version.
     - Use this if you are making changes to source code.
   
@@ -40,16 +40,16 @@ Add reCaptcha Secret Key:
  now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
  ```
 
-### Deploy directly to `now.sh`
+### Deploy directly to `ZEIT Now`
 
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/mobihack/aurora-comments/)
+![Deploying directly to ZEIT Now.](docs/assets/images/now-deploy.gif)
 
-![Deploy directly to ZEIT Now.](docs/assets/images/now-deploy.gif)
+Click to [Deploy directly to ZEIT Now](https://zeit.co/new/project?template=https://github.com/mobihack/aurora-comments/).
 
-Make sure to create a fork of the repository. The repository being private or public doesn't matter. After forking the repository, edit the config.js file with your details and reCaptcha site key. The changes will be automatically deployed by `now.sh`
+Make sure to create a fork of the repository. The repository being private or public doesn't matter. After forking the repository, edit the config.js file with your details and reCaptcha site key. The changes will be automatically deployed by `ZEIT Now`
 
 
-### Development setup and deploy to `now.sh`
+### Development setup and deploy to `ZEIT Now`
 
 1) Clone this repository.
 
@@ -157,8 +157,8 @@ Captcha can be disabled but it is not recommended. An exposed endpoint can lead 
 ### Why is a site name used instead of sending the repo name directly?
 Using a site name helps to avoid showing the repository name if it is private.
 
-### Why `now.sh`?
-`now.sh` is an easy to deploy tool with a free plan that can easily handle our workload.
+### Why `ZEIT Now`?
+`ZEIT Now` is an easy to deploy tool with a free plan that can easily handle our workload.
 
 ## Contributing
 
