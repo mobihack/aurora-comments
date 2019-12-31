@@ -112,9 +112,24 @@ now --prod
 
 Secrets must be set in advance.
 
-## API Outputs
+## API Requests
+  - `GET /`
+    - Shows info about Aurora Comments.
+  - `OPTIONS /`
+    - Pre-flight request response.
+  - `POST /`
+    - Accepts data and saves a comment.
+    - Params:
+      - `name`: User name of comment.
+      - `message`: Message of comment.
+      - `parent_id`: Parent ID of comment if it is a reply to another comment. 0 if it is a top-level comment.
+      - `slug`: URL slug (identifier) of post.
+      - reCaptcha data string if captcha is enabled.
+      
 
-All API transactions will have an output of this format.
+## API Response
+
+All API transactions will have an Response of this format.
 
 ```json
 {
@@ -126,21 +141,23 @@ All API transactions will have an output of this format.
 {
  "success": false,
  "code": "error-code",
- "message": "Error message, if any."
+ "message": "Error Message."
 }
 ```
-### API `success`
-
+### `success`
 True if the transaction was successful, false if not.
 
-### API `code`
-| Output               | Description                                    |
-| -------------------- | ---------------------------------------------- |
-| insufficient-inputs  | Inputs needed were not supplied.               |
-| recaptcha-error      | reCaptcha error.                               |
-| repo-not-configured  | The named site was not found in `config.repo`  |
-| repo-not-specified   | A named site was not sent in the POST params.  |
-| success              | OK / Success.                                  |
+### `code`
+| Output               | Description                                    | Error     |
+| -------------------- | ---------------------------------------------- | --------- |
+| insufficient-inputs  | Inputs needed were not supplied.               |     ✔️     |
+| recaptcha-error      | reCaptcha error.                               |     ✔️     |
+| repo-not-configured  | The named site was not found in `config.repo`  |     ✔️     |
+| repo-not-specified   | A named site was not sent in the POST params.  |     ✔️     |
+| success              | OK / Success.                                  |     ❌     |
+
+### `message`
+Gives an error message if the error-code is ambigous.
 
 ## FAQ
 Some Frequently Asked Questions and their answers.
@@ -151,7 +168,7 @@ The goal of Aurora is only to provide endpoints to easily allow comments in a st
 ### Do you have plans for a standard client library?
 Yes, I do have. But an ETA is not available.
 
-### Can I disable catcha?
+### Should I disable catcha?
 Captcha can be disabled but it is not recommended. An exposed endpoint can lead to token abuse.
 
 ### Why is a site name used instead of sending the repo name directly?
