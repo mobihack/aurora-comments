@@ -1,17 +1,17 @@
 ---
 layout: default
 ---
-<section class="hero is-white is-fullheight is-fullheight-with-navbar">
+<section class="hero is-white is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container has-text-centered">
             <figure class="image container is-128x128">
                 <img src="{{ "/assets/images/logo.png" | prepend: site.baseurl }}">
             </figure>
-            <h1 class="title">
+            <h1 class="title is-1">
                 Aurora Comments
             </h1>
             <h2 class="subtitle">
-                A now.sh ready Github based commenting system.
+                A Zeit Now ready Github based commenting system.
             </h2>
             <p>
                 <a href="#get-started" class="button is-primary">
@@ -92,4 +92,41 @@ layout: default
             </div>
         </div>
     </div>
+</section>
+<section class="hero is-medium container links-hero">
+    <div class="columns is-multiline">
+        <div class="column is-6 has-background-dark has-text-light">
+            <div class="links-section section">
+                <span class="icon is-large">
+                    <i class="fa fa-3x fa-github has-text-light"></i>
+                </span>
+                <p class="title has-text-white is-size-2">GitHub</p>
+                <p>Documentation & Souce Code for Aurora Comments.</p>
+                <br>
+                <a href="https://github.com/mobihack/aurora-comments" class="button is-medium is-primary">
+                    <span>Documenraton</span>
+                    <span class="icon">
+                        <i class="fa fa-long-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="column is-6 has-background-primary has-text-light">
+            <div class="links-section section">
+                <span class="icon is-large">
+                    <i class="fa fa-3x fa-eye has-text-light"></i>
+                </span>
+                <p class="title has-text-white is-size-2">Demo</p>
+                <p>Take a look at a preview of Aurora Comments.</p>
+                <br>
+                <a href="{{ "/blog/" | prepend: site.baseurl }}" class="button is-medium is-dark">
+                    <span>Demo</span>
+                    <span class="icon">
+                        <i class="fa fa-long-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
 </section>

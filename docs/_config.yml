@@ -1,5 +1,5 @@
 name: Aurora Comments
-description: "A now.sh ready Github based commenting system."
+description: "A Zeit Now ready Github based commenting system."
 baseurl: /aurora-comments
 url: https://mobihack.github.io
 permalink: /blog/:title.html
@@ -23,3 +23,6 @@ exclude:
   - LICENSE
   - CNAME
   - vendor
+
+sass:
+  sass_dir: _sass
