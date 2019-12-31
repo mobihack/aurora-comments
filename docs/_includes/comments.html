@@ -4,9 +4,7 @@
                   href="{{ '/pages/comment-policy.html' | prepend: site.baseurl }}">Comment Policy</a> before
             commenting.
       </div>
-      <div id="comments-slot">
-            {% include comment/comment_single.html slug=page.slug parent_id="0" level=1 max=site.comments.levels %}
-      </div>
+      {% include comment/comment_single.html slug=page.slug parent_id="0" level=1 max=site.comments.levels %}
       <br>
       <article class="media comment-form">
             <figure class="media-left">
@@ -87,7 +85,7 @@
                         }
                   },
                   cancelReply = function () {
-                        config.form_elem.querySelector('input[name="parent_id"]').value = "0";
+                        config.form_elem.querySelector('input[name="parent_id"]').value = '0';
                         config.form_elem.querySelector('.comment-reply').classList.add('is-hidden');
                   },
                   reply = function (id) {

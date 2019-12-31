@@ -13,6 +13,7 @@ comments:
   enabled: true
   name: 'aurora-demo'
   url: 'https://aurora-comments.mobihack.now.sh/'
+  levels: 3
   
 plugins:
   - jekyll-paginate

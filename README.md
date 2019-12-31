@@ -141,6 +141,9 @@ Secrets must be set in advance.
     Accepts data and saves a comment.
     
     Parameters:
+      - `sitename`
+
+        Specifies the repo from `config.repos`.
       - `name`
 
         User name of comment.
@@ -199,7 +202,7 @@ or
 ## FAQ
 Some Frequently Asked Questions and their answers.
 
-  * **How can I use this with Jekyll or any static?**
+  * **How can I use this with Jekyll or Github Pages?**
     
     The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to the libraries each uses. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using Vanilla JS, `XMLHttpRequest`, and DOM Manipulation.
 
