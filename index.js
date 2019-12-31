@@ -13,13 +13,7 @@ var client = github.client(config.token)
 app.use(express.json())
 
 var corsOptions = {
-  origin: function (origin, callback) {
-    if (config.domains.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
+  origin: config.domains
 }
 
 // READ Request Handlers
@@ -33,7 +27,7 @@ app.get('/', (req, res) => {
 })
 
 // enable pre-flight request for post request
-app.options('/', cors())
+app.options('/', cors(corsOptions))
 
 app.post('/', cors(corsOptions), (req, res) => {
   if (req.body.sitename === 'undefined' || !req.body.sitename) {

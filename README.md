@@ -14,7 +14,9 @@
 
  - [`now-cli`](https://zeit.co/download)
  - [Github Personal Access Token](https://github.com/settings/tokens)
+    - The generated token must have full repo acccess
  - [Recaptcha Keys](https://www.google.com/recaptcha/)
+    - Currently using reCaptcha v2.
 
 ## Installation
 
@@ -26,6 +28,8 @@ You can deploy Aurora Comments in two ways:
     - Use this if you are making changes to source code.
   
 Installation using both ways need the tokens to be set as [secrets](https://zeit.co/docs/v2/environment-variables-and-secrets).
+
+## Adding Secrets
 
 Add Github Personal Access Token:
 ```sh
@@ -42,7 +46,8 @@ Add reCaptcha Secret Key:
 
 ![Deploy directly to ZEIT Now.](docs/assets/images/now-deploy.gif)
 
-Make sure to create a fork of the repository. The repository being private or public doesn't matter.
+Make sure to create a fork of the repository. The repository being private or public doesn't matter. After forking the repository, edit the config.js file with your details and reCaptcha site key. The changes will be automatically deployed by `now.sh`
+
 
 ### Development setup and deploy to `now.sh`
 
@@ -141,29 +146,32 @@ True if the transaction was successful, false if not.
 Some Frequently Asked Questions and their answers.
 
 ### How can I use this with Jekyll or any static?
-The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./tree/master/docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
+The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
 
 ### Do you have plans for a standard client library?
 Yes, I do have. But an ETA is not available.
+
+### Can I disable catcha?
+Captcha can be disabled but it is not recommended. An exposed endpoint can lead to token abuse.
+
+### Why is a site name used instead of sending the repo name directly?
+Using a site name helps to avoid showing the repository name if it is private.
 
 ### Why `now.sh`?
 `now.sh` is an easy to deploy tool with a free plan that can easily handle our workload.
 
 ## Contributing
 
-You're more than welcome to contribute to the project :heart:
+You are more than welcome to contribute to the project.
 
 To contribute:
 
 1. Fork the repo.
 2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Use [Development Server](#development-setup) to check changes.
+3. Use Development Server to check changes.
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new pull request.
-
-
-Thank you!
 
 ## License
 
