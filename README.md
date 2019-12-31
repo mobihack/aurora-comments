@@ -2,21 +2,34 @@
 
 # Aurora Comment
 
+[![dependencies Status](https://badgen.net/david/dep/mobihack/aurora-comments)](https://david-dm.org/mobihack/aurora-comments)
+[![devDependencies Status](https://badgen.net/david/dev/mobihack/aurora-comments)](https://david-dm.org/mobihack/bulma-customize?type=dev)
+
 > A `ZEIT Now` ready Github based commenting system.
 
 ## Features
  - Static Comments.
+
+    Data is uploaded to your repositories `_data` folder.
  - Multiple website setup.
+
+    Can write comments to different websites with per-site configurations.
  - Nested comments.
+ 
+    Comments can be nested upto n-level.
  - reCaptcha
+
+    reCaptcha helps to minimise bots and unwanted token abuse.
 
 ## Prerequisite
 
  - [`now-cli`](https://zeit.co/download)
  - [Github Personal Access Token](https://github.com/settings/tokens)
-    - The generated token must have full repo acccess
+  
+    The generated token must have full repo acccess
  - [Recaptcha Keys](https://www.google.com/recaptcha/)
-    - Currently using reCaptcha v2.
+
+      Currently using reCaptcha v2.
 
 ## Installation
 
@@ -31,14 +44,15 @@ Installation using both ways need the tokens to be set as [secrets](https://zeit
 
 ## Adding Secrets
 
-Add Github Personal Access Token:
-```sh
- now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
- ```
-Add reCaptcha Secret Key:
- ```sh
- now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
- ```
+ 1) Add Github Personal Access Token:
+  
+    ```sh
+    now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
+    ```
+ 2) Add reCaptcha Secret Key:
+    ```sh
+    now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
+    ```
 
 ### Deploy directly to `ZEIT Now`
 
@@ -53,14 +67,17 @@ Make sure to create a fork of the repository. The repository being private or pu
 
 1) Clone this repository.
 
- ```sh
- git clone https://github.com/mobihack/aurora-comments.git
- ```
+    ```sh
+    git clone https://github.com/mobihack/aurora-comments.git
+    ```
 
 2) Rename `.env.sample` to `.env`.
 3) Edit `.env`.
- - Add your Github Personal Access Token.
- - Add your reCaptcha secret key.
+  
+    * Add your Github Personal Access Token.
+    
+    * Add your reCaptcha secret key.
+
  4) Edit config.js and add your reCaptcha site key.
 
 ## Configurations (config.js)
@@ -114,12 +131,16 @@ Secrets must be set in advance.
 
 ## API Requests
   - `GET /`
-    - Shows info about Aurora Comments.
+    
+    Shows info about Aurora Comments.
   - `OPTIONS /`
-    - Pre-flight request response.
+    
+    Pre-flight request response.
   - `POST /`
-    - Accepts data and saves a comment.
-    - Params:
+    
+    Accepts data and saves a comment.
+    
+    Parameters:
       - `name`: User name of comment.
       - `message`: Message of comment.
       - `parent_id`: Parent ID of comment if it is a reply to another comment. 0 if it is a top-level comment.
@@ -129,7 +150,7 @@ Secrets must be set in advance.
 
 ## API Response
 
-All API transactions will have an Response of this format.
+All API requests will have a response of this format.
 
 ```json
 {
@@ -137,6 +158,9 @@ All API transactions will have an Response of this format.
  "code": "success"
 }
 ```
+
+or
+
 ```json
 {
  "success": false,
@@ -144,38 +168,48 @@ All API transactions will have an Response of this format.
  "message": "Error Message."
 }
 ```
-### `success`
-True if the transaction was successful, false if not.
+  * `success`
+    
+    `true` if the request was successful.
+    
+    `false` if the request failed..
 
-### `code`
-| Output               | Description                                    | Error     |
-| -------------------- | ---------------------------------------------- | --------- |
-| insufficient-inputs  | Inputs needed were not supplied.               |     ✔️     |
-| recaptcha-error      | reCaptcha error.                               |     ✔️     |
-| repo-not-configured  | The named site was not found in `config.repo`  |     ✔️     |
-| repo-not-specified   | A named site was not sent in the POST params.  |     ✔️     |
-| success              | OK / Success.                                  |     ❌     |
+  * `code`
+    
+    | Output               | Description                                    | Error     |
+    | -------------------- | ---------------------------------------------- | --------- |
+    | insufficient-inputs  | Inputs needed were not supplied.               |     ✔️     |
+    | recaptcha-error      | reCaptcha error.                               |     ✔️     |
+    | repo-not-configured  | The named site was not found in `config.repo`  |     ✔️     |
+    | repo-not-specified   | A named site was not sent in the POST params.  |     ✔️     |
+    | success              | OK / Success.                                  |     ❌     |
 
-### `message`
-Gives an error message if the error-code is ambigous.
+  * `message`
+    
+    Gives an error message if the error-code is ambigous.
 
 ## FAQ
 Some Frequently Asked Questions and their answers.
 
-### How can I use this with Jekyll or any static?
-The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
+  * **How can I use this with Jekyll or any static?**
+    
+    The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
 
-### Do you have plans for a standard client library?
-Yes, I do have. But an ETA is not available.
+  * **Do you have plans for a standard client library?**
+    
+    Yes, I do have. But an ETA is not available.
 
-### Should I disable catcha?
-Captcha can be disabled but it is not recommended. An exposed endpoint can lead to token abuse.
+  * **Should I disable catcha?**
+    
+    Captcha can be disabled but it is not recommended. An exposed endpoint can lead to token abuse.
 
-### Why is a site name used instead of sending the repo name directly?
-Using a site name helps to avoid showing the repository name if it is private.
+  * **Why is a site name used instead of sending the repo name directly?**
+    
+    Using a site name helps to avoid showing the repository name if it is private.
 
-### Why `ZEIT Now`?
-`ZEIT Now` is an easy to deploy tool with a free plan that can easily handle our workload.
+  * **Why `ZEIT Now`?**
+    
+    `ZEIT Now` is an easy to deploy tool with a free plan that can easily handle our workload.
 
 ## Contributing
 
