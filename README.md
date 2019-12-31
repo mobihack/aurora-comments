@@ -5,7 +5,7 @@
 [![dependencies Status](https://badgen.net/david/dep/mobihack/aurora-comments)](https://david-dm.org/mobihack/aurora-comments)
 [![devDependencies Status](https://badgen.net/david/dev/mobihack/aurora-comments)](https://david-dm.org/mobihack/bulma-customize?type=dev)
 
-> A `ZEIT Now` ready Github based commenting system.
+> A `ZEIT Now` ready Github based static commenting system.
 
 ## Features
  - Static Comments.
@@ -141,11 +141,19 @@ Secrets must be set in advance.
     Accepts data and saves a comment.
     
     Parameters:
-      - `name`: User name of comment.
-      - `message`: Message of comment.
-      - `parent_id`: Parent ID of comment if it is a reply to another comment. 0 if it is a top-level comment.
-      - `slug`: URL slug (identifier) of post.
-      - reCaptcha data string if captcha is enabled.
+      - `name`
+
+        User name of comment.
+      - `message`
+
+        Message of comment.
+      - `parent_id`
+        
+        Parent ID of comment if it is a reply to another comment. 0 if it is a top-level comment.
+      - `slug`
+
+          URL slug (identifier) of post.
+      - reCaptcha data string (if captcha is enabled)
       
 
 ## API Response
@@ -176,15 +184,15 @@ or
 
   * `code`
     
-    | Output               | Description                                    | Error     |
+    | Output               | Description                                    | Success   |
     | -------------------- | ---------------------------------------------- | --------- |
-    | insufficient-inputs  | Inputs needed were not supplied.               |     ✔️     |
-    | recaptcha-error      | reCaptcha error.                               |     ✔️     |
-    | repo-not-configured  | The named site was not found in `config.repo`  |     ✔️     |
-    | repo-not-specified   | A named site was not sent in the POST params.  |     ✔️     |
-    | success              | OK / Success.                                  |     ❌     |
+    | insufficient-inputs  | Inputs needed were not supplied.               |     ❌     |
+    | recaptcha-error      | reCaptcha error.                               |     ❌     |
+    | repo-not-configured  | The named site was not found in `config.repo`  |     ❌     |
+    | repo-not-specified   | A named site was not sent in the POST params.  |     ❌     |
+    | success              | OK / Success.                                  |     ✔️     |
 
-  * `message`
+  * `message` *(optional)*
     
     Gives an error message if the error-code is ambigous.
 
@@ -193,7 +201,7 @@ Some Frequently Asked Questions and their answers.
 
   * **How can I use this with Jekyll or any static?**
     
-    The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
+    The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to the libraries each uses. So it is upto their own self to create the client side script. Please check [Example](./docs/_include/comments.html) to see a simple implementation using Vanilla JS, `XMLHttpRequest`, and DOM Manipulation.
 
   * **Do you have plans for a standard client library?**
     
@@ -215,21 +223,25 @@ Some Frequently Asked Questions and their answers.
 
 You are more than welcome to contribute to the project.
 
-To contribute:
-
 1. Fork the repo.
-2. Create your feature branch (`git checkout -b feature/fooBar`)
+2. Create your feature branch.
+    
+   ```git checkout -b feature/fooBar```
 3. Use Development Server to check changes.
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
+3. Commit your changes.
+    
+    ```git commit -am 'Add some fooBar'```
+4. Push to the branch.
+    
+    ```git push origin feature/fooBar```
 5. Create a new pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the `MIT License`. See the [LICENSE](LICENSE) file for further details.
 
 ## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :) 
+If this project helps you in any way, you can give donate me a cup of coffee :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EKLDUBPHHLRE4&source=url)
 
