@@ -12,6 +12,13 @@
 
 ## Installation
 
+### Deploy directly to `now.sh`
+
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/mobihack/aurora-comments)
+
+
+### Setup development setup and deploy to `now.sh`
+
 Install [`now-cli`](https://zeit.co/download) first.
 
 1) Clone this repository.
