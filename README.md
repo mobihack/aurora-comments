@@ -10,16 +10,41 @@
  - Nested comments.
  - reCaptcha
 
+## Prerequisite
+
+ - [`now-cli`](https://zeit.co/download)
+ - [Github Personal Access Token](https://github.com/settings/tokens)
+ - [Recaptcha Keys](https://www.google.com/recaptcha/)
+
 ## Installation
+
+You can deploy Aurora Comments in two ways:
+ 1) Deploy directly to `now.sh`.
+    - Use this if what you only need is a comments system. 
+ 2) Setup a development setup and deploy to `now.sh`.
+    - Use this if what you need a locally hosted version.
+    - Use this if you are making changes to source code.
+  
+Installation using both ways need the tokens to be set as [secrets](https://zeit.co/docs/v2/environment-variables-and-secrets).
+
+Add Github Personal Access Token:
+```sh
+ now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
+ ```
+Add reCaptcha Secret Key:
+ ```sh
+ now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
+ ```
 
 ### Deploy directly to `now.sh`
 
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/mobihack/aurora-comments)
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/mobihack/aurora-comments/)
 
+![Deploy directly to ZEIT Now.](docs/assets/images/now-deploy.gif)
 
-### Setup development setup and deploy to `now.sh`
+Make sure to create a fork of the repository. The repository being private or public doesn't matter.
 
-Install [`now-cli`](https://zeit.co/download) first.
+### Development setup and deploy to `now.sh`
 
 1) Clone this repository.
 
@@ -29,21 +54,13 @@ Install [`now-cli`](https://zeit.co/download) first.
 
 2) Rename `.env.sample` to `.env`.
 3) Edit `.env`.
- - Add your [Github Personal Access Token](https://github.com/settings/tokens).
- - Add your [Recaptcha Secret Key](https://www.google.com/recaptcha/).
- 4) Edit config.js and add your site key.
- 5) Add the secret tokens:
-
- ```sh
- now secrets add GITHUB_TOKEN <YOUR_GITHUB_TOKEN>
- ```
-
- ```sh
- now secrets add RECAPTCHA_SECRET_TOKEN <YOUR_RECAPTCHA_SECRET_TOKEN>
- ```
+ - Add your Github Personal Access Token.
+ - Add your reCaptcha secret key.
+ 4) Edit config.js and add your reCaptcha site key.
 
 ## Configurations (config.js)
 ```js
+
 module.exports = {
   token: process.env.GITHUB_TOKEN,
   repos: {
@@ -120,9 +137,17 @@ True if the transaction was successful, false if not.
 | repo-not-specified   | A named site was not sent in the POST params.  |
 | success              | OK / Success.                                  |
 
+## FAQ
+Some Frequently Asked Questions and their answers.
 
+### How can I use this with Jekyll or any static?
+The goal of Aurora is only to provide endpoints to easily allow comments in a static website. The client side of the code could change according to their own use. So it is upto their own self to create the client side script. Please check [Example](./tree/master/docs/_include/comments.html) to see a simple implementation using `XMLHttpRequest` and DOM Manipulation.
 
+### Do you have plans for a standard client library?
+Yes, I do have. But an ETA is not available.
 
+### Why `now.sh`?
+`now.sh` is an easy to deploy tool with a free plan that can easily handle our workload.
 
 ## Contributing
 
