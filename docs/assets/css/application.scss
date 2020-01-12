@@ -3,6 +3,9 @@
 ---
 // Bulma.io CSS Framework
 $primary: #5271ff;
+$radius-small: 0px;
+$radius: 0px;
+$radius-large: 0px;
 @import 'bulma/bulma';
 body{
   font-family: 'Lato', sans-serif;
@@ -26,7 +29,21 @@ body{
     color: $grey-light;
   }
 }
-
+.links-hero{
+  margin-bottom: -5rem;
+  z-index: 5;
+}
+.links-section {
+  p.title{
+    margin:0;
+    margin-top:0.75rem;
+    margin-bottom:0.25rem;
+    font-size: 1.25rem;
+  }
+  p{
+    margin:0;
+  }
+}
 
 .features-section{
   .icon > .fa{
@@ -42,4 +59,8 @@ body{
   p{
     margin:0;
   }
+}
+.footer{
+  z-index: 1;
+  padding-top: 8rem;
 }
