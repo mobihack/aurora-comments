@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A simple nodejs comments system that uses github commits to save comments.",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
