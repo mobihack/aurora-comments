@@ -1,5 +1,5 @@
 {% if include.level <= include.max %}
-{% assign comments = site.data.comments | where:'slug',include.slug | where:'parent_id',include.parent_id %}
+{% assign comments = site.data.comments | where:'slug',include.slug | where:'parent_id',include.parent_id | sort: "date" %}
 {% for comment in comments %}
 <article class="media">
     <figure class="media-left">
